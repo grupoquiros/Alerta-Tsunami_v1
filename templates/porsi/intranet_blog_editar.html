@@ -1,0 +1,121 @@
+{% extends "base_intranet.html" %}
+
+{% block content_intranet %}
+
+<h1 class="page-header">Editar Alarma</h1>
+
+<form class="form-horizontal" name="formulario-editar-alertas" method="post" action="{{ baseUrl() }}/intranet/alertas/editar/{{id}}">
+
+        {% if error is not empty %}
+            <h3 class="text-center"><span class="label label-danger">
+                {% if error == 1 %}
+                    {{ include(template_from_string(lang.inserttitle)) }}
+                {% elseif error == 2 %}
+                    {{ include(template_from_string(lang.inserttext)) }}
+                {% endif %}
+            </span></h3>
+        {% endif %}
+
+<fieldset>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_fecha_alerta">Fecha Alerta</label>  
+  <div class="col-md-4">
+  <input id="campo_fecha_alerta" name="campo_fecha_alerta" placeholder="Fecha" class="form-control input-md" required="" type="text" value="{{ fecha_alerta }}">
+  <span class="help-block">Formato Fecha: dd-mm-aaaa</span>      
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_hora_alerta">Hora Alerta</label>  
+  <div class="col-md-4">
+  <input id="campo_hora_alerta" name="campo_hora_alerta" placeholder="Fecha" class="form-control input-md" required="" type="text" value="{{ hora_alerta }}">
+  <span class="help-block">Formato Hora: hh:mm</span>      
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_nivel_alerta">Nivel de Alerta</label>  
+  <div class="col-md-8">
+  	<select class="form-control" id="campo_nivel_alerta" name="campo_nivel_alerta" required="" type="text">
+		{% if nivel_alerta == "3" %}
+		<option value="2">Alerta Amarilla - Riesgo Moderado de Tsunami </option>
+		<option selected="true" value="3">Alerta Roja - Riesgo Inminente de Tsunami (Evacuación)</option>
+		{% else %}
+		<option selected="true" value="2">Alerta Amarilla - Riesgo Moderado de Tsunami </option>
+		<option value="3">Alerta Roja - Riesgo Inminente de Tsunami (Evacuación)</option>		
+		{% endif %}
+	</select>
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_zonas">Zonas Afectadas</label>  
+  <div class="col-md-8">
+  	<select class="form-control" id="campo_zonas" name="campo_zonas" required="" type="text">
+		{% if zonas == "Cádiz" %}
+		<option selected="true" value="Cádiz">Cádiz</option>
+		<option value="Huelva">Huelva</option>
+		<option value="Cádiz y Huelva">Cádiz y Huelva</option>
+		{% elseif zonas == "Huelva" %}
+		<option value="Cádiz">Cádiz</option>
+		<option selected="true" value="Huelva">Huelva</option>
+		<option value="Cádiz y Huelva">Cádiz y Huelva</option>		
+		{% else %}
+		<option value="Cádiz">Cádiz</option>
+		<option value="Huelva">Huelva</option>
+		<option selected="true" value="Cádiz y Huelva">Cádiz y Huelva</option>		
+		{% endif %}
+	</select>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_resumen">Resumen Alerta</label>
+  <div class="col-md-8">                     
+    <textarea class="form-control" id="campo_resumen" name="campo_resumen">{{ resumen }}</textarea>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_detalle">Detalle Alerta</label>
+  <div class="col-md-8">                
+    <textarea class="form-control" id="campo_detalle" name="campo_detalle">{{ detalle }}</textarea>
+  </div>
+</div>
+            <script>
+				 CKEDITOR.replace( 'campo_detalle',
+				 {
+					 filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+					 filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images',
+					 filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Documentos',
+					 filebrowserImageUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Imagenes'
+				 });
+            </script>
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="boton_enviar"></label>
+  <div class="col-md-8">
+
+	<input type="hidden" name="redirect" value="{{ baseUrl() }}/intranet/alertas/listado" />  
+	
+	<button type="submit" id="boton_enviar" name="boton_enviar" class="btn btn-success">Guardar Cambios</button>&nbsp;
+    <button id="boton_cancelar" name="boton_cancelar" class="btn btn-danger" type="button" onClick="javascript: location.href='{{ baseUrl() }}/intranet/alertas/listado'">Cancelar</button>
+	
+  </div>
+</div>
+
+</fieldset>
+</form>
+	
+{% endblock %}

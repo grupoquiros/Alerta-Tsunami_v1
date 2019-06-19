@@ -1,0 +1,32 @@
+{% extends "base_intranet.html" %}
+
+{% block content_intranet %}
+
+<h1 class="page-header">Lista de Alertas</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ include(template_from_string(lang.titulo_alarmas)) }}</th>
+                <th>{{ include(template_from_string(lang.state)) }}</th>
+                <th>{{ include(template_from_string(lang.action)) }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td><a target="_blank" href="{{ baseUrl() }}/{{post.slug}}">{{post.date}} {{post.hora_alerta}} {{post.zonas}}</a></td>
+                    <td>
+                        {% if post.estado_alarma == "1" %}
+                            Activada / (<a href="{{ baseUrl() }}/intranet/alertas/desactivar/{{post.id}}">{{ include(template_from_string(lang.deactivate)) }}</a>)
+                        {% else %}
+                            Desactivada
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ baseUrl() }}/intranet/alertas/editar/{{post.id}}">{{ include(template_from_string(lang.edit)) }}</a> | <a href="{{ baseUrl() }}/intranet/alertas/borrar/{{post.id}}">{{ include(template_from_string(lang.delete)) }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

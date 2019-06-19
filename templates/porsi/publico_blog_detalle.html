@@ -1,0 +1,108 @@
+{% extends "base_blog.html" %}
+
+{% block content %}
+
+	
+    <!--=== Content Part ===-->
+    <div class="container content">		
+    	<div class="row blog-page blog-item">
+            <!-- Left Sidebar -->
+        	<div class="col-md-9 md-margin-bottom-60">
+                <!--Blog Post-->        
+                <div class="blog margin-bottom-40">
+			
+				<div itemscope itemtype="http://schema.org/BlogPosting">	
+					
+                    <h2 itemprop="headline"><i class="fa fa-calendar"></i> {{post.date}} <i class="fa fa-clock-o"></i> {{post.hora_alerta}}</h2>
+					<h2><p><b><span itemprop="description">{{post.resumen}}</span></b></p></h2>
+					<h2 itemprop="headline"><i class="fa fa-map-marker"></i> {{post.zonas}}</h2>	
+					
+
+						<div class="blog-img">					
+							{% if post.nivel_alarma == '3' %}
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-rojo.png"  alt="Alto riesgo de Tsunami"></center>
+							{% elseif post.nivel_alarma == '2' %}
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-amarillo.png"  alt="Alerta, riesgo moderado de Tsunami"></center>
+							{% else %}		
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-verde.png"  alt="No hay alertas activas"></center>
+							{% endif %}	
+						</div>
+						
+					<br>
+					
+					<H1>Detalles de la Alerta</H1>
+					<br>					
+					<div itemprop="articleBody">{{post.detalle|raw}}</div>
+					<br>
+					<p><a class="btn-u btn-u-small" href="{{ baseUrl() }}/alertas"><i class="fa fa-arrow-left"></i> Volver</a></p>
+					<!-- Resto de Etiquetas -->
+
+
+						<meta itemprop="url" 			content="{{ baseUrl() }}/{{post.slug}}">
+						<meta itemprop="datePublished" 	content="{{fecha_original}}">						
+						<meta itemprop="dateModified"  	content="{{fecha_original}}">
+						<a itemprop="mainEntityOfPage" href="{{ baseUrl() }}"></a>						
+
+						<span itemprop="author" itemscope itemtype="http://schema.org/Organization">
+						<meta itemprop="name" content="TSigno"></span>						
+
+						<span itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+
+							{% if post.img_fichero is empty %}
+								<meta itemprop="url" content="{{ baseUrl() }}/imagenes/blog/sin-imagen.jpg"> 
+							{% else %}		
+								<meta itemprop="url" content="{{ baseUrl() }}{{post.img_fichero}}"> 
+							{% endif %}	
+							
+							<meta itemprop="height" content="475">
+							<meta itemprop="width"  content="845">
+						</span>
+						
+						<span itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+							<meta itemprop="name" content="TSigno"> 
+							<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+							<meta itemprop="url" content="{{ baseUrl() }}/imagenes/logos/tsigno-logo-reducido.png"> 
+							</span>
+						</span>
+
+                    
+                </div>
+				</div>
+                <!--End Blog Post-->        
+
+
+            </div>
+            <!-- End Left Sidebar -->
+
+		
+        <!-- Begin Sidebar -->
+		<div class="visible-md visible-lg">	
+            <div class="col-md-3">
+
+                <!-- Contacts -->
+                <div class="headline"><h2>Datos de Contacto</h2></div>
+                <ul class="list-unstyled who margin-bottom-30">
+                    <li><i class="fa fa-home"></i>Av. de la Paz, 137</li>
+                    <li><i class="fa fa-map-marker"></i>26006 Logroño, La Rioja</li>					
+                    <li><i class="fa fa-phone"></i>+34 941 209 743</li>
+                    <li><i class="fa fa-envelope"></i>info@alertatsunami.com</li>
+                </ul>
+                <!-- Horario -->
+                <div class="headline"><h2>Horario</h2></div>
+                <ul class="list-unstyled margin-bottom-30">
+                    <li><strong>Lunes-Viernes:</strong> De 08:00 a 15:00</li>
+                    <li><strong>Sábados y Domingos:</strong> Cerrado</li>
+                </ul>
+
+            </div>
+		</div>
+        <!-- End Sidebar -->	
+
+
+        </div><!--/row-->        
+    </div><!--/container-->		
+    <!--=== End Content Part ===-->
+
+
+		
+{% endblock %}

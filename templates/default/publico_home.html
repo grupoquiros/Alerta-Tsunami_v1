@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+    <!--=== Slider ===-->
+    <div class="slider-inner">
+        <div id="da-slider" class="da-slider">
+
+			<div class="da-slide">
+                <h2><i>SISTEMA DE ALERTA</i> <br /> <i>A LA POBLACIÓN</i> <br /> <i>ANTE TSUNAMIS</i></h2>
+                <p><i>UNIR. Trabajo Final de Grado (TFG)</i> <br /> <i>Realizado por: Miguel Ángel Quirós</i></p>
+                <div class="da-img"><img class="img-responsive" src="{{ baseUrl() }}/imagenes/slider/img-01.png" alt="Imagen que representa un Tsunami"></div>
+            </div>			
+        </div>
+    </div><!--/slider-->
+    <!--=== End Slider ===-->
+
+    <div class="clearfix margin-bottom-30"></div>
+
+
+
+    <div class="container">	
+	
+        <!--Title Box-->        
+        <div class="title-box">
+            <div class="title-box-text">Estado actual del <span class="color-green">Sistema de Alerta</span> ante Tsunamis</div>
+            <p>A continuación se muestra el estado de alerta en el que nos encontramos</p>
+        </div>
+        <!-- End Promo Box -->  
+
+
+<!-- BLOQUE LISTA DE ALARMAS -->		
+
+{% if contador_alertas > '0' %}
+
+    {% for post in posts %}
+
+	<!--Post Alertas-->
+			{% if post.nivel_alarma == '3' %}
+			<div class="alert alert-danger fade in">
+			{% elseif post.nivel_alarma == '2' %}
+			<div class="alert alert-warning fade in">
+			{% else %}	
+			<div class="alert alert-success fade in">
+			{% endif %}	
+				<div itemscope itemtype="http://schema.org/BlogPosting">				
+                <div class="row blog blog-medium margin-bottom-40">
+                    <div class="col-md-5">
+
+
+						<div class="blog-img">					
+							{% if post.nivel_alarma == '3' %}
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-rojo.png" width="150" alt="Alto riesgo de Tsunami"></center>
+							{% elseif post.nivel_alarma == '2' %}
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-amarillo.png" width="150" alt="Alerta, riesgo moderado de Tsunami"></center>
+							{% else %}		
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-verde.png" width="150" alt="No hay alertas activas"></center>
+							{% endif %}	
+						</div>
+
+					
+                    </div>    
+                    <div class="col-md-7">
+                        <h2 itemprop="headline"><i class="fa fa-calendar"></i> {{post.date}} <i class="fa fa-clock-o"></i> {{post.hora_alerta}}</h2>
+						<h2 itemprop="headline"><i class="fa fa-map-marker"></i> {{post.zonas}}</h2>						
+
+                        <p><span itemprop="description">{{post.resumen|raw}}</span></p>
+                        <p><a class="btn-u btn-u-small" href="{{ baseUrl() }}/{{post.slug}}"><i class="fa fa-plus"></i> Más información</a></p>
+						<!-- Resto de Etiquetas -->
+						<meta itemprop="url" 			content="{{ baseUrl() }}/{{post.slug}}">
+						<meta itemprop="datePublished" 	content="{{fecha_original}}">						
+						<meta itemprop="dateModified"  	content="{{fecha_original}}">
+						<a itemprop="mainEntityOfPage" href="{{ baseUrl() }}"></a>						
+
+						<span itemprop="author" itemscope itemtype="http://schema.org/Organization">
+						<meta itemprop="name" content="Alerta Tsunami"></span>						
+
+						<span itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+
+							{% if post.img_fichero is empty %}
+								<meta itemprop="url" content="{{ baseUrl() }}/imagenes/blog/sin-imagen.jpg"> 
+							{% else %}		
+								<meta itemprop="url" content="{{ baseUrl() }}{{post.img_fichero}}"> 
+							{% endif %}	
+							
+							<meta itemprop="height" content="475">
+							<meta itemprop="width"  content="845">
+						</span>
+						
+						<span itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+							<meta itemprop="name" content="Alerta Tsunami"> 
+							<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+							<meta itemprop="url" content="{{ baseUrl() }}/imagenes/logos/at-logo-reducido.png"> 
+							</span>
+						</span>
+						
+
+						
+					
+						
+					</div>    
+                </div>
+				</div>
+			</div>
+                <!--End Posts Alertas -->        
+				
+                <hr class="margin-bottom-40">
+	{% endfor %}
+
+<!-- FIN BLOQUE LISTA DE ALARMAS -->		
+		
+{% else %}	
+		
+		<!-- Alert Box SIN ALERTAS -->   
+		<div class="alert alert-success fade in">
+			<strong>SIN ALERTAS</strong> Actualmente no existe ninguna alerta.
+			<br>
+			    <center>
+					<img src="imagenes/maquetacion/at-escudo-verde.png" alt="Simulacion Tsunami" class="img-responsive">
+				</center>
+			<br>
+		</div>	
+		<!-- End Alert Box SIN ALERTAS -->  
+{% endif %}		
+
+		
+    <!--=== Welcome Block ===-->
+    <div class="purchase">
+        <div class="container">
+            <div class="shadow-wrapper">
+                <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                    <h1><b>Tsunami</b> is coming</h1>
+                    <p>El riesgo de Tsunamis en el litoral suroccidental de la península ibérica: Cádiz, Huelva y Algarve Portugués es más que inminente. La máxima geológica dice que allá donde hubo un temblor éste volverá a repetirse, por tanto, aunque es imposible precisar cuándo sucederá, lo que sí es una verdad irrefutable es que un nuevo Tsunami golpeará nuestras costas, quizás dentro de 100 años o quizás mañana mismo.</p>
+                </div>
+            </div> 
+        </div>
+    </div><!--/row-->
+    <!-- End Welcome Block -->		
+		
+
+	</div>
+
+	
+
+	
+    <!--=== Content Part ===-->
+
+	<!--/container-->     
+    <!-- End Content Part -->
+
+
+
+
+
+	
+
+{% endblock %}

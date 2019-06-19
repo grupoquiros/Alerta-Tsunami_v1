@@ -1,0 +1,6 @@
+En el fichero base.html se ha inyectado directamente el código CSS, unificando y minificando los ficheros:
+
+bootstrrap.css
+
+
+Por tanto no se importa ningún fichero .css

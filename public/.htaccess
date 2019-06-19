@@ -1,0 +1,63 @@
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access 1 year"
+ExpiresByType image/jpeg "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType text/css "access 1 month"
+ExpiresByType text/html "access 1 month"
+ExpiresByType application/pdf "access 1 month"
+ExpiresByType text/x-javascript "access 1 month"
+ExpiresByType application/x-shockwave-flash "access 1 month"
+ExpiresByType image/x-icon "access 1 year"
+ExpiresDefault "access plus 1 month"
+</IfModule>
+## EXPIRES CACHING ##
+
+
+## Comprimir los textos con GZIP (si está instalado)
+<IfModule mod_gzip.c>
+mod_gzip_on Yes
+mod_gzip_dechunk Yes
+mod_gzip_item_include file .(html?|txt|css|js|php|pl)$
+mod_gzip_item_include handler ^cgi-script$
+mod_gzip_item_include mime ^text/.*
+mod_gzip_item_include mime ^application/x-javascript.*
+mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</IfModule>
+
+## Comprimir los tectos con DEFLATE (si está instalado)
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/x-httpd-php
+AddOutputFilterByType DEFLATE application/x-httpd-fastphp
+</IfModule>
+
+
+RewriteEngine On
+
+# NECESARIO PARA LA API
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# FUERZA EL CONTROLADOR DE SLIM
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [QSA,L]
+
+# Redireccionar index.php al dominio principal
+RewriteCond %{THE_REQUEST} ^.*/index\.php 
+RewriteRule ^(.*)index.php$ /$1 [R=301,L]
+
+# Redirección 301 para páginas que contengan una url con: /index.php/
+# Ejemplo: misitio.com/index.php/mi-enlace-menu lo pasará a misitio.com/mi-enlace-menu
+RewriteCond %{THE_REQUEST} ^(GET|HEAD)\ /index\.php/[^\ ]+ 
+RewriteRule ^index\.php/(.*)$ /$1 [L,R=301]

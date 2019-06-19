@@ -1,0 +1,96 @@
+{% extends "base_intranet.html" %}
+
+{% block content_intranet %}
+
+<h1 class="page-header">Nuevo Usuario</h1>
+
+<form class="form-horizontal" name="formulario-alta-usuarios" method="post" action="{{ baseUrl() }}/intranet/usuarios/nuevo">
+
+		<!-- Control de Errores-->
+        {% if error is not empty %}
+            <h3 class="text-center"><span class="label label-danger">
+                {% if error == 1 %}
+                    {{ include(template_from_string(lang.inserttitle)) }}
+                {% elseif error == 2 %}
+                    {{ include(template_from_string(lang.inserttext)) }}
+                {% endif %}
+            </span></h3>
+        {% endif %}
+
+<fieldset>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_nombre">Nombre</label>  
+  <div class="col-md-8">
+  <input id="campo_nombre" name="campo_nombre" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_apellidos">Apellidos</label>  
+  <div class="col-md-8">
+  <input id="campo_apellidos" name="campo_apellidos" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_email">Email</label>  
+  <div class="col-md-4">
+  <input id="campo_email" name="campo_email" class="form-control input-md" required="" type="email">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_telefono">Teléfono Móvil</label>  
+  <div class="col-md-4">
+  <input id="campo_telefono" name="campo_telefono" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_zonas">Zona de Residencia</label>  
+  <div class="col-md-8">
+  	<select class="form-control" id="campo_zonas" name="campo_zonas" required="" type="text">
+		<option>Cádiz</option>
+		<option>Huelva</option>
+		<option>Cádiz y Huelva</option>
+	</select>
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="campo_password">Contraseña</label>  
+  <div class="col-md-4">
+  <input id="campo_password" name="campo_password" class="form-control input-md" required="" type="password">
+  </div>
+</div>
+
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="boton_enviar"></label>
+  <div class="col-md-8">
+
+	<input type="hidden" name="redirect" value="{{ baseUrl() }}/intranet/alertas/listado" />  
+	
+	<button type="submit" id="boton_enviar" name="boton_enviar" class="btn btn-success">Salvar Datos</button>&nbsp;
+    <button id="boton_cancelar" name="boton_cancelar" class="btn btn-danger" type="button" onClick="javascript: location.href='{{ baseUrl() }}/intranet/alertas/listado'">Cancelar</button>
+	
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Alerta Tsunami</title>
+	<script>setTimeout('document.location.reload()',5000); </script>
+  </head>
+  
+ 
+
+  
+<!-- BLOQUE LISTA DE ALARMAS -->		
+
+{% if contador_alertas > '0' %}
+
+    {% for post in posts %}
+
+	<!--Post Alertas-->
+			{% if post.nivel_alarma == '3' %}
+				<body style="background-color:#FF0000;">
+					<br><br>
+					<center>
+						<img src="{{ baseUrl() }}/imagenes/maquetacion/logo_alerta_tsunami_sombra.png" alt="Alerta Tsunami" height="300"> 
+						<br>
+						<h1 style="color:#FFFFFF"><font face="arial">Zona: {{post.zonas}}</font></h1>
+						<h1 style="color:#FFFFFF"><font face="arial">Fecha: {{post.date}} - Hora: {{post.hora_alerta}}</font></h1>
+						<br>
+						<p><font face="arial">{{post.resumen|raw}}</font></p>
+					</center>
+			  </body>
+			{% elseif post.nivel_alarma == '2' %}
+				<body style="background-color:#faed1c;">
+					<br><br>
+					<center>
+						<img src="{{ baseUrl() }}/imagenes/maquetacion/logo_alerta_tsunami_sombra.png" alt="Alerta Tsunami" height="300">
+						<br>
+						<h1><font face="arial">Zona: {{post.zonas}}</h1>
+						<h1><font face="arial">Fecha: {{post.date}} - Hora:{{post.hora_alerta}}</h1>
+						<br>
+						<p><font face="arial">{{post.resumen|raw}}</font></p>
+				</center>
+			  </body>
+			{% else %}
+				<p>no hay</p>
+			{% endif %}	
+
+	{% endfor %}
+
+<!-- FIN BLOQUE LISTA DE ALARMAS -->		
+		
+{% else %}	
+		
+		<!-- SIN ALERTA -->   
+		<body style="background-color:#1ae01a;">
+			<br><br><br><br>
+			<center>
+				<img src="{{ baseUrl() }}/imagenes/maquetacion/logo_alerta_tsunami_sombra.png" alt="Alerta Tsunami" height="300">
+				<br>
+				<h1><font face="arial"><< SIN ALERTAS >></font></h1>
+			</center>
+		</body>
+		<!-- FIN SIN ALERTAS -->  
+{% endif %}		  
+  
+
+  
+</html>

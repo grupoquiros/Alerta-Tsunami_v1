@@ -1,0 +1,145 @@
+{% extends "base_blog.html" %}
+
+{% block content %}
+
+	
+    <!--=== Content Part ===-->
+    <div class="container content">		
+    	<div class="row blog-page">    
+            <!-- Left Sidebar -->
+			
+			
+        	<div class="col-md-9 md-margin-bottom-40">
+			<div class="headline"><h1>Historial de alertas</h1></div>	
+			<br>
+
+			
+			
+<!-- inico blucle automatico --> 			
+
+    {% for post in posts %}
+                <!--Post Alertas-->
+				<div itemscope itemtype="http://schema.org/BlogPosting">				
+                <div class="row blog blog-medium margin-bottom-40">
+                    <div class="col-md-5">
+
+
+						<div class="blog-img">					
+							{% if post.nivel_alarma == '3' %}
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-rojo.png" width="150" alt="Alto riesgo de Tsunami"></center>
+							{% elseif post.nivel_alarma == '2' %}
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-amarillo.png" width="150" alt="Alerta, riesgo moderado de Tsunami"></center>
+							{% else %}		
+								<center><img class="img-responsive" src="{{ baseUrl() }}/imagenes/maquetacion/at-escudo-verde.png" width="150" alt="No hay alertas activas"></center>
+							{% endif %}	
+						</div>
+
+					
+                    </div>    
+                    <div class="col-md-7">
+                        <h2 itemprop="headline"><i class="fa fa-calendar"></i> {{post.date}} <i class="fa fa-clock-o"></i> {{post.hora_alerta}}</h2>
+						<h2 itemprop="headline"><i class="fa fa-map-marker"></i> {{post.zonas}}</h2>						
+
+                        <p><span itemprop="description">{{post.resumen|raw}}</span></p>
+                        <p><a class="btn-u btn-u-small" href="{{ baseUrl() }}/{{post.slug}}"><i class="fa fa-plus"></i> Más información</a></p>
+						<!-- Resto de Etiquetas -->
+						<meta itemprop="url" 			content="{{ baseUrl() }}/{{post.slug}}">
+						<meta itemprop="datePublished" 	content="{{fecha_original}}">						
+						<meta itemprop="dateModified"  	content="{{fecha_original}}">
+						<a itemprop="mainEntityOfPage" href="{{ baseUrl() }}"></a>						
+
+						<span itemprop="author" itemscope itemtype="http://schema.org/Organization">
+						<meta itemprop="name" content="Alerta Tsunami"></span>						
+
+						<span itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+
+							{% if post.img_fichero is empty %}
+								<meta itemprop="url" content="{{ baseUrl() }}/imagenes/blog/sin-imagen.jpg"> 
+							{% else %}		
+								<meta itemprop="url" content="{{ baseUrl() }}{{post.img_fichero}}"> 
+							{% endif %}	
+							
+							<meta itemprop="height" content="475">
+							<meta itemprop="width"  content="845">
+						</span>
+						
+						<span itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+							<meta itemprop="name" content="Alerta Tsunami"> 
+							<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+							<meta itemprop="url" content="{{ baseUrl() }}/imagenes/logos/tsigno-logo-reducido.png"> 
+							</span>
+						</span>
+						
+
+						
+					
+						
+					</div>    
+                </div>
+				</div>
+                <!--End Posts Alertas -->        
+
+                <hr class="margin-bottom-40">
+	{% endfor %}
+
+                <!--Pagination-->
+                <div class="text-center">
+					<ul class="pagination">
+						<li class="{% if page == 1 %}disabled{% endif %}">
+						  {% if page > 1 %}
+							<a href="{{ baseUrl() }}/blog/{{page-1}}">&laquo;</a>
+						  {% else %}
+							<span>&laquo;</span>
+						  {% endif %}
+						</li>
+						{% for i in 1..pages %}
+						  <li class="{% if page == i %}active{% endif %}">
+							<a href="{{ baseUrl() }}/blog/{{i}}">{{i}}</a>
+						  </li>
+						{% endfor %}
+						<li class="{% if page == pages %}disabled{% endif %}">
+						  {% if page < pages %}
+							<a href="{{ baseUrl() }}/blog/{{page+1}}">&raquo;</a>
+						  {% else %}
+							<span>&raquo;</span>
+						  {% endif %}
+						</li>
+					</ul>                                                           
+                </div>
+                <!--End Pagination-->
+				
+            </div>
+            <!-- End Left Sidebar -->
+
+        <!-- Begin Sidebar -->
+		<div class="visible-md visible-lg">	
+            <div class="col-md-3">
+
+                <!-- Contacts -->
+                <div class="headline"><h2>Datos de Contacto</h2></div>
+                <ul class="list-unstyled who margin-bottom-30">
+                    <li><i class="fa fa-home"></i>Av. de la Paz, 137</li>
+                    <li><i class="fa fa-map-marker"></i>26006 Logroño, La Rioja</li>					
+                    <li><i class="fa fa-phone"></i>+34 941 209 743</li>
+                    <li><i class="fa fa-envelope"></i>info@alertatsunami.com</li>
+                </ul>
+                <!-- Horario -->
+                <div class="headline"><h2>Horario</h2></div>
+                <ul class="list-unstyled margin-bottom-30">
+                    <li><strong>Lunes-Viernes:</strong> De 08:00 a 15:00</li>
+                    <li><strong>Sábados y Domingos:</strong> Cerrado</li>
+                </ul>
+
+            </div>
+		</div>
+        <!-- End Sidebar -->		
+
+        </div><!--/row-->        
+    </div><!--/container-->		
+    <!--=== End Content Part ===-->
+
+
+
+
+		
+{% endblock %}

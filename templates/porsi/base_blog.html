@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="es" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="es" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->  
+<head>
+    <title>{{titulo}}</title>
+
+    <!-- General Metas -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Metas -->
+    <meta name="title" content="{{titulo}}">
+    <meta name="description" content="{{descripcion}}">
+    <meta name="news_keywords" content="{{keywords}}">
+    <meta name="author" content="{{autor}}">
+
+	<!-- Etiquetas Meta formato Open Graph para compartir contenido -->
+
+	<!-- REVISAR TODO -->
+	
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" 		 content="summary_large_image">
+	<meta name="twitter:site" 		 content="@alertatsunami">
+	<meta name="twitter:url" 		 content="{{baseUrl()}}/{{post.slug}}">
+	<meta name="twitter:title" 		 content="{{post.title}}">
+	<meta name="twitter:description" content="{{post.entradilla}}">
+	<meta name="twitter:image" 		 content="{{baseUrl()}}{{post.img_fichero}}">
+	<meta name="twitter:image:alt" 	 content="{{post.img_descripcion}}">	
+
+	<!-- Open Graph data -->
+	<meta property="og:type" 		 content="article" />
+	<meta property="og:url" 		 content="{{baseUrl()}}/{{post.slug}}" />
+	<meta property="og:title" 		 content="{{post.title}}" />
+	<meta property="og:description"  content="{{post.entradilla}}" />
+	<meta property="og:image" 		 content="{{baseUrl()}}{{post.img_fichero}}" />
+	
+	<meta property="og:video" 		 content="{{post.url_video}}" />
+	<meta property="og:video:width"  content="560" />
+	<meta property="og:video:height" content="340" />
+	<meta property="og:video:type"   content="application/x-shockwave-flash" />	
+	
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ baseUrl() }}/imagenes/iconos/favicon.ico">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-blog/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-blog/at-v3.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-blog/line-icons.css">
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-blog/font-awesome.min.css">
+
+	<!-- Estilo barra CSS -->
+	<style>
+	#barracookies {text-transform: NONE;display: none;z-index: 99999;position:fixed;left:0px;right:0px;min-height:40px;padding:30px;background: #333333;color:white;line-height:20px;font-family:verdana;font-size:12px;text-align:center;box-sizing:border-box;box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.5);} #barracookies a:nth-child(2) {padding:4px;background:#3498db;border-radius:5px;text-decoration:none;} #barracookies a {color: #fff;text-decoration: none;}#barracookies a:hover {color: #fff;BACKGROUND: #2980b9;}	
+	</style>
+	
+ 	<!-- JS Google Anaytics -->	
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-75907523-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+
+	
+
+</head> 
+
+<body>
+<div class="row team margin-bottom-20" id="barracookies">
+	Este sitio web usa cookies propias y de terceros para mejorar nuestros servicios y recoger información sobre su navegación. Si pulsa "aceptar" o continúa navegando consideraremos que admite el uso e instalación en su equipo o dispositivo. Encontrará más información en nuestra <a href="{{ baseUrl() }}/politica-de-cookies">Política de Cookies.</a>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="var expiration = new Date(); expiration.setTime(expiration.getTime() + (60000*60*24*365)); setCookie('avisocookies','1',expiration,'/');document.getElementById('barracookies').style.display='none';"><b>&nbsp;&nbsp;&nbsp;ACEPTAR&nbsp;&nbsp;&nbsp;</b></a>
+</div>
+<div class="wrapper">
+
+<!--=== COMIENZA CABECERA ===-->
+
+    <!--=== Header Version 4 ===-->    
+    <div class="header">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="container">
+				
+				{% if user is empty %}
+                <!-- Topbar Navigation -->
+                <ul class="loginbar pull-right">
+                    <li><a href="{{ baseUrl() }}/login"><i class="fa fa-user"></i> Acceder </a></li>   
+                </ul>
+                <!-- End Topbar Navigation -->
+				{% else %}                
+				<!-- Topbar Navigation -->
+                <ul class="loginbar pull-right">
+                    <li class="topbar-devider"></li>   
+                    <li><a href="{{ baseUrl() }}/usuarios">Panel de Control</a></li>  
+                    <li class="topbar-devider"></li>   
+                    <li><a href="{{ baseUrl() }}/usuarios/logout"><i class="fa fa-user"></i> {{ include(template_from_string(lang.logout)) }} ({{user}}) </a></li>   
+                </ul>
+                <!-- End Topbar Navigation -->
+				{% endif %}		
+		
+            </div>
+        </div>
+        <!-- End Topbar -->
+        <br>
+
+		{% if user is empty %}		
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Navegación Móvil</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+
+						<!-- Home -->
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}">Inicio</a>
+                        </li>
+                        <!-- End Home -->
+
+                        <!-- El Proyecto -->                        
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/el-proyecto">El Proyecto</a>
+                        </li>
+                        <!-- End El Proyecto -->
+                        
+                        <!-- Alta de Usuarios -->
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/registro">Registrarse</a>
+                        </li>
+                        <!-- End Alta de Usuarios -->
+						
+                        <!-- Historial Alertas -->                        
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/alertas">Historial</a>
+                        </li>
+                        <!-- Historial Alertas -->								
+
+                        <!-- Contacto -->
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/contacto">Contacto</a>
+                        </li>                    
+                        <!-- End Contacto-->
+
+                    </ul>
+                </div><!--/navbar-collapse-->
+            </div>    
+        </div>            
+        <!-- End Navbar -->
+		
+		{% else %}                
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Navegación Móvil</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ baseUrl() }}/"></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Video Interpretación -->
+                        <li class="dropdown_without ">
+                            <a href="{{ baseUrl() }}/usuarios/videointerpretacion">Video Interpretación</a>
+                        </li>
+                        <!-- End Video Interpretación -->
+
+                        <!-- Formación -->
+                        <li class="dropdown_without ">
+                            <a href="#">Formación</a>
+                        </li>
+                        <!-- End Formación -->                        
+
+                        <!-- Panel de Control -->
+                        <li class="dropdown_without ">
+                            <a href="{{ baseUrl() }}/usuarios/panel">Panel de Control</a>
+                        </li>
+                        <!-- Panel de Control -->                        
+                    </ul>
+                </div><!--/navbar-collapse-->
+            </div>    
+        </div>            
+        <!-- End Navbar -->
+		{% endif %}		
+
+
+
+		
+    </div>
+    <!--=== End Header Version 4 ===-->    
+<!--=== Termina la Cabecera ===-->
+
+    <!--=== Content Part ===-->
+        {% block content %}
+        {% endblock %} 
+    <!-- End Content Part -->
+
+<!--=== Comienza el PIE ===-->
+
+    <!--=== Footer Version 2 ===-->
+    <div class="footer-v2">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+
+					<!-- About -->
+                    <div class="col-md-3 md-margin-bottom-40">
+                        <a href="{{ baseUrl() }}"><img class="footer-logo" src="{{ baseUrl() }}/imagenes/logos/at-logo-reducido.png" alt="Logotipo de Alerta Tsunami"></a>
+                        <p class="margin-bottom-20">Alerta Tsunami permite avisar directamente a la población y centros de emergencia ante la amenaza de Tsunamis.</p>
+                    </div><!--/col-md-3-->
+                    <!-- End About -->
+                    
+                    <!-- Link List -->
+                    <div class="col-md-3 md-margin-bottom-40">
+                        <div class="headline"><h2 class="heading-sm">Enlaces</h2></div> 
+                        <ul class="list-unstyled link-list">
+							<li><a href="{{ baseUrl() }}/el-proyecto">El proyecto</a><i class="fa fa-angle-right"></i></li>
+							<li><a href="{{ baseUrl() }}/alta-usuarios">Alta de usuarios</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="{{ baseUrl() }}/contacto">Contacto</a><i class="fa fa-angle-right"></i></li>
+                        </ul>
+                    </div><!--/col-md-3-->
+                    <!-- End Link List -->                   
+
+                    <!-- Redes Sociales -->
+                    <div class="col-md-3 md-margin-bottom-40">
+                        <div class="headline"><h2 class="heading-sm">Redes Sociales</h2></div>
+                        <!-- Social Links -->
+                        <p class="margin-bottom-20">Sigue nuestro proyecto a través de las Redes Sociales</p>						
+                        <ul class="social-icons">
+                            <li><a href="#" data-original-title="Facebook" class="rounded-x social_facebook" title="Link Facebook"></a></li>
+                            <li><a href="#" data-original-title="Twitter" class="rounded-x social_twitter" title="Link Twitter"></a></li>
+                            <li><a href="#" data-original-title="Linkedin" class="rounded-x social_linkedin" title="Link Linkedin"></a></li>
+							</ul>
+                        <!-- End Social Links -->
+                    </div>
+                    <!-- End Redes Sociales -->    
+
+					
+
+					
+					<!-- Address -->
+					<div itemscope itemtype="http://schema.org/Organization">
+						<div class="col-md-3 md-margin-bottom-40">
+							<div class="headline"><h2 class="heading-sm">Contacto</h2></div>                         
+							<address class="md-margin-bottom-40">
+								<i class="fa fa-globe"></i><span itemprop="name">UNIR</span><br />
+								<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+									<i class="fa fa-home"></i><span itemprop="streetAddress">Av. de la Paz, 137</span><br />
+									<i class="fa fa-map-marker"></i><span itemprop="postalCode">26006</span><span itemprop="addressLocality"> Logroño, La Rioja</span><br />	
+								</div>							
+								<i class="fa fa-phone"></i>Teléfono: <span itemprop="telephone">+34 941 209 743 </span><br />
+							</address>
+						</div><!--/col-md-3-->
+						<!-- End Address -->
+					</div>	
+					
+                </div>
+            </div> 
+        </div><!--/footer-->
+
+        <div class="copyright">
+            <div class="container">
+                <p class="text-center">Alerta Tsunami 2019 &copy; Todos los derechos reservados | <a href="http://www.alertatsunami.com/politica-de-cookies">Política de Cookies</a></p>
+            </div> 
+        </div><!--/copyright--> 
+    </div>   
+    <!--=== End Footer Version 2 ===-->
+<!--=== Termina el PIE ===-->
+
+</div><!--/wrapper-->
+
+    <!-- Gestión de cookies-->
+    <script type='text/javascript'>function setCookie(name,value,expires,path,domain,secure){document.cookie=name+"="+escape(value)+((expires==null)?"":"; expires="+expires.toGMTString())+((path==null)?"":"; path="+path)+((domain==null)?"":"; domain="+domain)+((secure==null)?"":"; secure")}function getCookie(name){var cname=name+"=";var dc=document.cookie;if(dc.length>0){begin=dc.indexOf(cname);if(begin!=-1){begin+=cname.length;end=dc.indexOf(";",begin);if(end==-1)end=dc.length;return unescape(dc.substring(begin,end))}}return null}function delCookie(name,path,domain){if(getCookie(name)){document.cookie=name+"="+((path==null)?"":"; path="+path)+((domain==null)?"":"; domain="+domain)+"; expires=Thu, 01-Jan-70 00:00:01 GMT"}}</script>
+     
+     
+    <!-- Gestión barra aviso cookies -->
+    <script type='text/javascript'>
+    var comprobar = getCookie("avisocookies");
+    if (comprobar == 1) {/*Si se ha pulsado OK..que no se muestre el aviso*/
+    var expiration = new Date();
+    expiration.setTime(expiration.getTime() + (60000*60*24*365));
+    setCookie("avisocookies","1",expiration);
+    document.getElementById("barracookies").style.display="none";
+     
+    }else {/*Si todavia no se ha pulsado OK..que Si se muestre el aviso*/
+    document.getElementById("barracookies").style.display="block";
+    }
+    </script>
+
+
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="{{ baseUrl() }}/js-publico/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{{ baseUrl() }}/js-publico/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{{ baseUrl() }}/js-publico/bootstrap.min.js"></script> 
+
+
+
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-542ed86e5180c997"></script>
+
+<!--
+{% if  pagina_actual == 'detalle' %}
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!--<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-542ed86e5180c997"></script>
+{% endif %} -->
+
+</body>
+</html>	

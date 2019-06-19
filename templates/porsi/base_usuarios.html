@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="es" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="es" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->  
+<head>
+    <title>{{settings.title}}</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ baseUrl() }}/imagenes/iconos/favicon.ico">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/style.css">
+	
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/font-awesome.min.css">
+
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/blue.css" id="style_color">
+	
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/custom.css">
+	
+    <!-- CSS Page Perfil Style -->
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/profile.css">	
+	
+    <!-- CSS Page Error Style -->    
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/page_404_error.css">	
+	
+    <link rel="stylesheet" href="{{ baseUrl() }}/css-usuarios/sticky-footer-navbar.css">		
+    <script src="{{ baseUrl() }}/js-usuarios/jquery.min.js"></script>	
+</head> 
+
+<body>
+
+<div class="wrapper">
+
+<!--=== COMIENZA CABECERA ===-->
+
+    <!--=== Header Version 4 ===-->    
+    <div class="header">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="container">
+				
+				{% if user is empty %}
+                <!-- Topbar Navigation -->
+                <ul class="loginbar pull-right">
+                    <li class="topbar-devider"></li>   
+                    <li><a href="page_faq.html">Ayuda</a></li>  
+                    <li class="topbar-devider"></li>   
+                    <li><a href="{{ baseUrl() }}/login"><i class="fa fa-user"></i> Acceder </a></li>   
+                </ul>
+                <!-- End Topbar Navigation -->
+				{% else %}                
+				<!-- Topbar Navigation -->
+                <ul class="loginbar pull-right">
+                    <li><a href="{{ baseUrl() }}/usuarios/logout"><i class="fa fa-user"></i> {{ include(template_from_string(lang.logout)) }} ({{user}}) </a></li>   
+                </ul>
+                <!-- End Topbar Navigation -->
+				{% endif %}		
+		
+            </div>
+        </div>
+        <!-- End Topbar -->
+        <br>
+
+		{% if user is empty %}		
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Navegación Móvil</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+
+						<!-- Home -->
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}">Inicio</a>
+                        </li>
+                        <!-- End Home -->
+
+                        <!-- El Proyecto -->                        
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/el-proyecto">El Proyecto</a>
+                        </li>
+                        <!-- End El Proyecto -->
+                        
+                        <!-- Alta de Usuarios -->
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/registro">Registrarse</a>
+                        </li>
+                        <!-- End Alta de Usuarios -->
+						
+                        <!-- Historial Alertas -->                        
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/alertas">Historial</a>
+                        </li>
+                        <!-- Historial Alertas -->						
+
+                        <!-- Contacto -->
+                        <li class="dropdown_without">
+                            <a href="{{ baseUrl() }}/contacto">Contacto</a>
+                        </li>                    
+                        <!-- End Contacto-->
+
+                    </ul>
+                </div><!--/navbar-collapse-->
+            </div>    
+        </div>            
+        <!-- End Navbar -->
+		
+		{% else %}                
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                    
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+					
+                        <!-- Inicio -->
+                        <li class="dropdown_without ">
+                            <a href="{{ baseUrl() }}/usuarios">Inicio</a>
+                        </li>
+                        <!-- End Inicio -->
+						
+                        <!-- Video Editar Perfil -->
+                        <li class="dropdown_without ">
+                            <a href="{{ baseUrl() }}/usuarios/editar/{{user_id}}">Editar Perfil</a>
+                        </li>
+                        <!-- End Editar Perfil -->
+                    </ul>
+                </div><!--/navbar-collapse-->
+            </div>    
+        </div>            
+        <!-- End Navbar -->
+		{% endif %}		
+
+
+
+		
+    </div>
+    <!--=== End Header Version 4 ===-->    
+
+
+<!--=== TERMINA LA CABECERA ===-->
+
+
+
+
+    <!--=== Content Part ===-->
+        {% block content %}
+		
+        {% endblock %} 
+    <!-- End Content Part -->
+
+
+
+<!--=== Comienza el PIE ===-->
+    <footer class="footer-usuarios">
+      <div class="container">
+		<p class="text-muted">2019 &copy; Todos los derechos reservados. Portal desarrollado por<a target="_blank" href="https://www.alertatsunami.com"> Alerta Tsunami</a></p>		
+      </div>
+    </footer>
+<!--=== Termina el PIE ===-->
+
+
+
+</div><!--/wrapper-->
+
+
+    <script src="{{ baseUrl() }}/js-usuarios/bootstrap.min.js"></script>
+
+
+<!--[if lt IE 9]>
+	<script src="js/respond.js"></script>
+<![endif]-->
+
+
+</body>
+</html>	

@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <!--=== Content Part ===-->
+    <div class="container content">     
+        <div class="row margin-bottom-30">
+            <div class="col-md-9 mb-margin-bottom-30">
+
+				{% if error is not empty %}
+						{% if error == 0 %}			  
+							<div class="alert alert-success fade in">
+                                <strong>Muchas Gracias.</strong> Su mensaje ha sido enviado con éxito, en breve contactaremos con usted.
+                            </div>	
+                        {% elseif error == 1 %}
+							<div class="alert alert-danger fade in">
+                                <strong>Atención:</strong> Es necesario que introduzca su nombre.
+                            </div>	
+						{% elseif error == 2 %}
+							<div class="alert alert-danger fade in">
+                                <strong>Atención:</strong> Por favor, revise el correo electrónico. 
+                            </div>							
+						{% elseif error == 3 %}
+							<div class="alert alert-danger fade in">
+                                <strong>Atención:</strong> Introduzca su número de Teléfono.
+                            </div>	
+						{% elseif error == 4 %}
+							<div class="alert alert-danger fade in">
+                                <strong>Atención:</strong> Es necesario que escriba su mensaje.
+                            </div>	
+						{% elseif error == 5 %}
+							<div class="alert alert-danger fade in">
+                                <strong>Atención:</strong> Es obligatorio leer y aceptar la Política de Privacidad.
+                            </div>	
+						{% elseif error == 6 %}
+							<div class="alert alert-danger fade in">
+                                <strong>Atención:</strong> Es obligatorio demostrar que no eres un robot.
+                            </div>								
+						{% endif %}  
+				{% endif %}
+				
+				<div class="headline"><h1>Contacte con nosotros</h1></div>			
+                <!-- Google Map -->
+                <!-- <div id="map" class="map map-box map-box-space margin-bottom-40"></div> -->
+                <!-- End Google Map -->
+
+                <p>Puede contactar con nosotros de lunes a viernes en horario de 8:00 a 15:00 a través del teléfono 600 212 924, o bien escribirnos a través de WhatsApp mediante el mismo número. Si lo prefiere también puede escribirnos cumplimentando el siguiente formulario:</p>
+           
+            
+
+				<!-- Comienzo de Formulario -->
+				<form name="formulario-contacto" method="post" action="{{ baseUrl() }}/contacto">
+
+                    <label>Nombre</label>
+                    <div class="row margin-bottom-20">
+                        <div class="col-md-7 col-md-offset-0">
+							<input type="text" class="form-control" name="nombre" required="">							
+                        </div>                
+                    </div>
+                    
+                    <label>Email</label>
+                    <div class="row margin-bottom-20">
+                        <div class="col-md-7 col-md-offset-0">
+                            <input type="email" class="form-control" name="email" required="">
+                        </div>                
+                    </div>
+					
+                    <label>Teléfono</label>
+                    <div class="row margin-bottom-20">
+                        <div class="col-md-7 col-md-offset-0">
+                            <input type="text" class="form-control" name="telefono" required="">							
+                        </div>                
+                    </div>					
+                    
+                    <label>Mensaje</label>
+                    <div class="row margin-bottom-20">
+                        <div class="col-md-11 col-md-offset-0">
+                            <textarea rows="8" class="form-control" name="mensaje" required=""></textarea >							
+                        </div>                
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="aceptar" name="check" value="SI" required>
+                             <label for="aceptar">&nbsp;He leído y acepto la <a href="{{ baseUrl() }}/politica-de-privacidad" target="_blank">política de privacidad.</a></label>
+                    </div>
+
+					<br>
+					<div class="g-recaptcha" data-sitekey="6LcW7agUAAAAAFqeY9BneOgp94rEZuUv_-ilnDGY"></div>					
+					<br>
+					
+                    <p><button type="submit" class="btn-u">Enviar Mensaje</button></p>
+					<br>
+                </form>			
+			</div>
+            <!-- Fin de Formulario -->			
+			
+            <!-- Begin Sidebar -->
+			
+            <div class="col-md-3">
+	
+                <!-- Contacts -->
+                <div class="headline"><h2>Datos de Contacto</h2></div>
+                <ul class="list-unstyled who margin-bottom-30">
+                    <li><i class="fa fa-home"></i>Av. de la Paz, 137</li>
+                    <li><i class="fa fa-map-marker"></i>26006 Logroño, La Rioja</li>					
+                    <li><i class="fa fa-phone"></i>+34 941 209 743</li>
+                    <li><i class="fa fa-envelope"></i>info@alertatsunami.com</li>
+                </ul>
+
+                <!-- Business Hours -->
+                <div class="headline"><h2>Horario</h2></div>
+                <ul class="list-unstyled margin-bottom-30">
+                    <li><strong>Lunes-Viernes:</strong> De 08:00 a 15:00</li>
+                    <li><strong>Sábados y Domingos:</strong> Cerrado</li>
+                </ul>
+
+			
+                <!-- Social Icons -->
+                <div class="magazine-sb-social margin-bottom-30">
+                    <div class="headline headline-md"><h2>Redes Sociales</h2></div>
+                    <ul class="social-icons social-icons-color">
+                        <li><a class="social_facebook" data-original-title="Facebook" href="#"></a></li>
+                        <li><a class="social_twitter" data-original-title="Twitter" href="#"></a></li>
+                        <li><a class="social_linkedin" data-original-title="Linkedin" href="#"></a></li>
+					</ul>
+                    <div class="clearfix"></div>                
+                </div>
+                <!-- End Social Icons -->
+				
+
+
+            </div>
+            <!-- End Sidebar -->			
+			
+			
+        </div>
+    </div><!--/container-->     
+    <!-- End Content Part -->
+
+	
+
+{% endblock %}

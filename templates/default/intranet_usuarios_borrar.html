@@ -1,0 +1,12 @@
+{% extends "base_intranet.html" %}
+
+{% block content_intranet %}
+
+        <form class="form-signin" method="post" action="{{baseUrl() }}/intranet/usuarios/borrar/{{usuario_id}}">
+            <h2>¿Realmente quiere borrar al usuario {{usuario.nombre}} {{usuario.apellidos}}?</h2>
+			<br>
+            <input type="hidden" name="_METHOD" value="DELETE"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ include(template_from_string(lang.delete)) }}</button>
+        </form>
+
+{% endblock %}

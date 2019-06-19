@@ -1,0 +1,26 @@
+{% extends "base_intranet.html" %}
+
+{% block content_intranet %}
+
+<h1 class="page-header">Lista de Usuarios</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Apellidos y Nombre</th>
+                <th>Zona</th>
+                <th>{{ include(template_from_string(lang.action)) }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{usuario.apellidos}}, {{usuario.nombre}}</a></td>
+                    <td>{{usuario.zona}}</a></td>
+                    <td><a href="{{ baseUrl() }}/intranet/usuarios/editar/{{usuario.id}}">{{ include(template_from_string(lang.edit)) }}</a> | <a href="{{ baseUrl() }}/intranet/usuarios/borrar/{{usuario.id}}">{{ include(template_from_string(lang.delete)) }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

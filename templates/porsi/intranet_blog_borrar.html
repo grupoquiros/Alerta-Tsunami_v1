@@ -1,0 +1,12 @@
+{% extends "base_intranet.html" %}
+
+{% block content_intranet %}
+
+        <form class="form-signin" method="post" action="{{baseUrl() }}/intranet/alertas/borrar/{{post_id}}">
+            <h2>¿Realmente quiere borrar la alerta?</h2>
+			<br>
+            <input type="hidden" name="_METHOD" value="DELETE"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ include(template_from_string(lang.delete)) }}</button>
+        </form>
+
+{% endblock %}

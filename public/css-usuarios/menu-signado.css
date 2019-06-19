@@ -1,0 +1,60 @@
+/* Para mostrar imagenes en los menus */
+.spanimg {
+	display: none;
+	position: absolute;
+	z-index: 500;
+	/*top:0px;*/
+	/*border:1px solid #f2f2f2;*/
+	overflow:hidden;
+	border:2px solid #043D4D;
+	border-radius:10px;
+	box-shadow:1px 3px 15px #043D4D;
+	margin-top: 30px;
+}
+.spanimg img{
+	margin:0;
+	display:block;
+	border-radius:9px;
+}
+a:hover .spanimg,
+label.option:hover .spanimg,
+.poll .vote-form .choices .title:hover .spanimg,
+.poll .title:hover .spanimg,
+.poll .text:hover .spanimg,
+.form-item label:hover .spanimg,
+.share a:hover .spanimg,
+.webform-confirmation:hover .spanimg,
+.messages:hover .spanimg,
+a:focus .spanimg
+{
+	display: block;
+}
+
+#footer li .spanimg{
+	top:-100px;
+	right:0px;
+}
+
+.region-header .block-menu li .spanimg,
+.region-header .block-locale ul li .spanimg{
+	left:10px;
+	top:1.1em;
+}
+
+#sidebar-first ul.menu li .spanimg{
+	right:0px;
+	bottom:0px;
+}
+
+.share li .spanimg{
+	right:0px;
+	bottom:30px !important;
+}
+
+.messages:hover .spanimg
+{
+	display: block;
+	left:0px;
+	top:0px;
+}
+

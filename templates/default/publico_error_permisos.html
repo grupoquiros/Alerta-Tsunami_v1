@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!--=== Content Part ===-->
+    <div class="container content">		
+        <!--Error Block-->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="error-v1">
+                    <img class="img-responsive center-block" src="imagenes/maquetacion/mano-stop.png" alt="Mano que prohibe el acceso">
+                    <span>No tiene permisos</span>
+                    <p>Lo sentimos pero no tiene permisos para acceder al área solicitada.</p>
+                    <a class="btn-u btn-bordered" href="/usuarios">Volver</a>
+                </div>
+            </div>
+        </div>
+        <!--End Error Block-->
+    </div>	
+    <!--=== End Content Part ===-->
+
+{% endblock %}

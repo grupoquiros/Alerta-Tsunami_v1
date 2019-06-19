@@ -1,0 +1,15 @@
+{% extends "base_intranet.html" %}
+
+{% block content_intranet %}
+    <h1 class="text-center">
+        <span class="label label-success">{{ include(template_from_string(lang.success)) }}</span>
+    </h1>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            window.setTimeout(function () {
+                location.href = "{{ redirect }}";
+            }, 2000)
+        });
+    </script>
+{% endblock %}

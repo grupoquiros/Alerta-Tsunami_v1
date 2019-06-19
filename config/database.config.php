@@ -5,9 +5,9 @@
 return array(
     'driver' => 'mysql',
     'host' => 'localhost',
-    'database' => 'bbdd_at_web',
-    'username' => 'user_bbdd_at',
-    'password' => 'Yr4670w7kM$',
+    'database' => 'borrado-por-seguridad',
+    'username' => 'borrado-por-seguridad',
+    'password' => 'borrado-por-seguridad',
     'prefix' => '',
     'charset' => 'utf8',
     'collation' => 'utf8_general_ci',
